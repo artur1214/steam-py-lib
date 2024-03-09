@@ -60,6 +60,7 @@ from base64 import b64encode
 from getpass import getpass
 import six
 import requests
+import time
 
 from steam.enums.proto import EAuthSessionGuardType
 from steam.steamid import SteamID
@@ -333,6 +334,8 @@ class WebAuth(object):
                 # Actually this must will never be called, because
                 # Errors can be only like wrong cookies. (Theoretically)
                 raise WebAuthException("Something invalid went. Try again later.")
+        # Quick fix for accepting login via phone
+        time.sleep(10)
         self._pollLoginStatus()
         self._finalizeLogin()
 
